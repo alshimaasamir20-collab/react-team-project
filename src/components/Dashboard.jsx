@@ -1,4 +1,5 @@
-
+import { useEffect, useState } from "react";
+import api from "../services/api";
 
 
 const stats = [
@@ -67,6 +68,32 @@ const recentOrders = [
 
 
 function Dashboard() {
+  
+
+// الكود ده بيعمل إيه؟
+// - useState(null): بيجهّز مكان نخزّن فيه بيانات الـAPI.
+// - api.get(...): بيطلب بيانات الـDashboard من السيرفر.
+// - setDashboardData(...): بيحفظ البيانات اللي رجعت.
+// - useEffect(..., []): بيشغّل الطلب أول ما الـDashboard يفتح.
+// ملحوظة: دي تجربة الجلب الأولية فقط؛ لسه ما فعلناش التحديث كل 30 ثانية.
+
+const [dashboardData, setDashboardData] = useState(null);
+
+useEffect(() => {
+  const fetchDashboard = async () => {
+    try {
+      const response = await api.get("/orders/admin/dashboard");
+      setDashboardData(response.data.dashboard);
+      console.log("Dashboard data:", response.data.dashboard);
+    } catch (error) {
+      console.error("Failed to fetch dashboard:", error);
+    }
+  };
+
+  fetchDashboard();
+}, []);
+
+
   return (
 
 
