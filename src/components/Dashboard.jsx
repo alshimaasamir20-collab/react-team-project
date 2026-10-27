@@ -260,7 +260,7 @@ className="flex min-w-0 items-start justify-between rounded-2xl border border-wh
         {recentOrders.map((order) => (
           <tr
             key={order.id}
-            className="border-b border-slate-50 text-xs last:border-0"
+            className="border-b border-slate-50 text-xs last:border-0 transition-colors duration-200 hover:bg-slate-50"
           >
             <td className="whitespace-nowrap px-3 py-4 font-semibold text-slate-700">
               {order.id}
