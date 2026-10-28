@@ -22,10 +22,10 @@
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-sky-50 to-indigo-100 flex items-center justify-center p-4">
-        <div className="w-full max-w-4xl bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row border border-white/60">
+        <div className="min-h-screen bg-gradient-to-br from-[#E9F5EF] via-[#f4faf6] to-[#fffdf7] flex items-center justify-center p-4">
+        <div className="w-full max-w-4xl bg-[#fffdf7] rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row border border-white/60">
             
-            <div className="md:w-1/2 bg-gradient-to-b from-[#2563eb] to-[#0284c7] p-8 md:p-12 text-white flex flex-col justify-between">
+            <div className="md:w-1/2 bg-gradient-to-b from-[#123C35] to-[#187a63] p-8 md:p-12 text-white flex flex-col justify-between">
             <div>
                 <div className="flex items-center gap-2 mb-10">
                 <div className="w-8 h-8 rounded-lg border-2 border-white/80 flex items-center justify-center">
@@ -62,18 +62,18 @@
             
             <div className="text-center mb-6">
                 <div className="inline-flex items-center gap-2 mb-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#0284c7] to-[#0ea5e9] flex items-center justify-center text-white font-black text-xl shadow-md shadow-sky-500/20">
+                <div className="w-10 h-10 rounded-xl bg-[#123C35] flex items-center justify-center text-white font-black text-xl shadow-md shadow-sky-500/20">
                     K
                 </div>
                 <div className="text-left leading-none">
-                    <span className="block font-black text-lg tracking-wider text-slate-800">KODA</span>
-                    <span className="block font-bold text-xs tracking-widest text-[#0ea5e9]">STORE</span>
-                    <span className="block text-[9px] text-slate-400 uppercase tracking-tight">ONLINE STORE</span>
+                    <span className="block font-black text-lg tracking-wider text-[#123C35]">KODA</span>
+                    <span className="block font-bold text-xs tracking-widest text-[#187a63]">STORE</span>
+                    <span className="block text-[9px] text-[#123C35]/50 uppercase tracking-tight">ONLINE STORE</span>
                 </div>
                 </div>
 
-                <h2 className="text-2xl font-bold text-slate-800">Welcome Back</h2>
-                <p className="text-xs text-slate-400 mt-1">Sign in to your admin dashboard</p>
+                <h2 className="text-2xl font-bold text-[#123C35]">Welcome Back</h2>
+                <p className="text-xs text-slate-500 mt-1">Sign in to your admin dashboard</p>
             </div>
 
             {error && (
@@ -84,7 +84,7 @@
 
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                <label className="block text-xs font-medium text-slate-600 mb-1">
+                <label className="block text-xs font-medium text-[#123C35] mb-1">
                     Email Address
                 </label>
                 <div className="relative">
@@ -95,13 +95,13 @@
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="admin@koda.com"
-                    className="w-full pl-10 pr-4 py-2.5 bg-[#b2becd]/40 focus:bg-white text-slate-800 placeholder-slate-500 border border-transparent focus:border-sky-500 rounded-lg text-xs outline-none transition"
+                    className="w-full pl-10 pr-4 py-2.5 bg-[#e9f5ef]/60 focus:bg-white text-[#123C35] placeholder-slate-400 border border-transparent focus:border-sky-500 rounded-lg text-xs outline-none transition"
                     />
                 </div>
                 </div>
 
                 <div>
-                <label className="block text-xs font-medium text-slate-600 mb-1">
+                <label className="block text-xs font-medium text-[#123C35] mb-1">
                     Password
                 </label>
                 <div className="relative">
@@ -112,7 +112,7 @@
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full pl-10 pr-4 py-2.5 bg-[#b2becd]/40 focus:bg-white text-slate-800 placeholder-slate-500 border border-transparent focus:border-sky-500 rounded-lg text-xs outline-none transition"
+                    className="w-full pl-10 pr-4 py-2.5 bg-[#e9f5ef]/60 focus:bg-white text-[#123C35] placeholder-slate-400 border border-transparent focus:border-sky-500 rounded-lg text-xs outline-none transition"
                     />
                 </div>
                 </div>
@@ -120,7 +120,7 @@
                 <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2.5 bg-[#00a8cc] hover:bg-[#0092b3] text-white font-medium rounded-lg text-sm shadow-md shadow-cyan-500/20 transition duration-150 disabled:opacity-50"
+                className="w-full py-2.5 bg-[#123C35] hover:bg-[#0f2f2a] text-white font-medium rounded-lg text-sm shadow-md shadow-green-500/20 transition duration-150 disabled:opacity-50"
                 >
                 {loading ? 'Signing in...' : 'Sign In'}
                 </button>
