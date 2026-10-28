@@ -24,6 +24,8 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import Login from './pages/Login';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
+import Users from "./pages/Users"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 function DashboardLayout() {
   const { logout, user } = useAuth();
@@ -63,8 +65,21 @@ function MainApp() {
 
 export default function App() {
   return (
-    <AuthProvider>
-      <MainApp />
-    </AuthProvider>
+    // the route here is a place holder until the navbar and it's related actions are added
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/users" element={<Users/>}>
+
+          </Route>
+        </Routes>
+
+      </BrowserRouter>
+      <AuthProvider>
+        <MainApp />
+
+      </AuthProvider>
+    </div>
+
   );
 }
