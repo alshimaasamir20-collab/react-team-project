@@ -1,5 +1,5 @@
 
-import axios from "axios";
+
 
 
 
@@ -12,26 +12,14 @@ import axios from "axios";
 
 
 
+import axios from "axios";
+
 const api = axios.create({
-  baseURL: "https://e-commerce-api-3wara.vercel.app/",
+  baseURL: "https://e-commerce-api-3wara.vercel.app",
+  headers: {
+    Accept: "application/json",
+  },
+  withCredentials: true,
 });
-
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
-
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-
-  return config;
-});
-
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    console.error("API Error:", error.response?.data || error.message);
-    return Promise.reject(error);
-  }
-);
 
 export default api;
