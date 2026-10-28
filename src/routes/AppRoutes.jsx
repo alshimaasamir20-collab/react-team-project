@@ -1,18 +1,23 @@
 import { Routes, Route } from "react-router-dom";
 
+import Dashboard from "../pages/Dashboard";
+import Users from "../pages/Users";
+import Products from "../pages/Products";
+import AddProduct from "../pages/AddProduct";
+import Orders from "../pages/Orders";
+import Carts from "../pages/Carts";
+import Settings from "../pages/Settings";
+
 function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<h1>Dashboard</h1>} />
-      <Route path="/users" element={<h1>users</h1>}/>
-      <Route path="/products" element={<h1>Products</h1>} />
-      <Route path="/products/add" element={<h1>Add Product</h1>} />
-      <Route path="/orders" element={<h1>orders</h1>}/>
-      <Route path="/carts" element={<h1>carts</h1>}/>
-      <Route path="/settings" element={<h1>settings</h1>}/>
-      <Route path="*" element={<h1>page not found</h1>}/>
-
-
+      <Route path="/" element={<Dashboard />} />
+      <Route path="/users" element={<Users />} />
+      <Route path="/products" element={<Products />} />
+      <Route path="/products/add" element={<AddProduct />} />
+      <Route path="/orders" element={<Orders />} />
+      <Route path="/carts" element={<Carts />} />
+      <Route path="/settings" element={<Settings />} />
     </Routes>
   );
 }
