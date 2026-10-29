@@ -1,39 +1,31 @@
-import {
-  Menu,
-  Bell,
-  Sun,
-  Moon,
-  LogOut,
-} from "lucide-react";
+import React from "react";
+import { Menu, Bell, Sun, Moon, LogOut } from "lucide-react";
+import { useAuth } from '../context/AuthContext';
 
 function Navbar({ darkMode, setDarkMode, onMenuClick }) {
+  const {  logout, user } = useAuth();
+
   return (
-    <header
-      className={`sticky top-0 z-30 flex h-16 items-center justify-between gap-2 border-b px-3 sm:px-6 ${
-        darkMode
-          ? "border-gray-700 bg-gray-900 text-white"
-          : "border-gray-200 bg-white text-gray-900"
-      }`}
-    >
-      <div className="flex min-w-0 items-center gap-2 sm:gap-3">
+    <header className="sticky top-0 z-50 flex h-16 items-center justify-between gap-2 bg-emerald-600 px-3 text-white shadow-md sm:px-6">
+      <div className="flex min-w-0 items-center gap-3">
         <button
           onClick={onMenuClick}
-          aria-label="Toggle sidebar"
-          className="shrink-0 rounded-lg p-2 hover:bg-gray-500/10 lg:hidden"
+          aria-label="Open sidebar"
+          className="shrink-0 rounded-lg p-2 transition hover:bg-white/15 lg:hidden"
         >
           <Menu size={24} />
         </button>
 
-        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-600 font-bold text-white">
-          W
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white font-bold text-emerald-700 shadow-sm">
+          <span className="text-xl">N</span>
         </div>
 
         <div className="min-w-0">
-          <h1 className="truncate font-bold sm:text-lg">
-            WattWise
+          <h1 className="truncate text-lg font-bold sm:text-xl">
+            Nexora
           </h1>
-          <p className="hidden text-xs text-gray-500 sm:block">
-            Smart Energy Dashboard
+          <p className="hidden text-xs text-emerald-50 sm:block">
+            Admin Dashboard
           </p>
         </div>
       </div>
@@ -41,29 +33,38 @@ function Navbar({ darkMode, setDarkMode, onMenuClick }) {
       <div className="flex shrink-0 items-center gap-1 sm:gap-3">
         <button
           aria-label="Notifications"
-          className="rounded-lg p-2 hover:bg-gray-500/10"
+          className="rounded-lg p-2 transition hover:bg-white/15"
         >
           <Bell size={20} />
         </button>
 
         <button
-          onClick={() => setDarkMode(!darkMode)}
+          onClick={() => setDarkMode((prev) => !prev)}
           aria-label="Toggle dark mode"
-          className="rounded-lg p-2 hover:bg-gray-500/10"
+          className="rounded-lg p-2 transition hover:bg-white/15"
         >
           {darkMode ? <Sun size={20} /> : <Moon size={20} />}
         </button>
 
         <div className="hidden items-center gap-2 sm:flex">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-100 font-semibold text-blue-700">
-            A
+          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-100 font-semibold text-emerald-800">
+            {user?.name ? user.name[0].toUpperCase() : 'A'}
           </div>
-          <span className="text-sm font-semibold">Admin</span>
+          <div className="flex flex-col text-left">
+                <span className="text-xs font-bold text-slate-800 uppercase leading-none">
+                {user?.role || 'ADMIN'}
+                </span>
+                <span className="text-[10px] text-slate-400 leading-tight mt-0.5">
+                Admin
+                </span>
+            </div>
         </div>
+        
 
         <button
+          onClick={logout}
           aria-label="Logout"
-          className="rounded-lg p-2 hover:bg-red-500/10"
+          className="rounded-lg p-2 transition hover:bg-white/15"
         >
           <LogOut size={20} />
         </button>
