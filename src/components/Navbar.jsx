@@ -1,9 +1,21 @@
 import React from "react";
 import { Menu, Bell, Sun, Moon, LogOut } from "lucide-react";
-import { useAuth } from '../context/AuthContext';
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function Navbar({ darkMode, setDarkMode, onMenuClick }) {
-  const {  logout, user } = useAuth();
+  const { logout, user } = useAuth() || {};
+  const navigate = useNavigate();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    console.log("Logging out...");
+    if (logout) {
+      logout();
+    }
+    localStorage.clear();
+    window.location.replace("/login");
+  };
 
   return (
     <header className="sticky top-0 z-50 flex h-16 items-center justify-between gap-2 bg-emerald-600 px-3 text-white shadow-md sm:px-6">
@@ -51,18 +63,18 @@ function Navbar({ darkMode, setDarkMode, onMenuClick }) {
             {user?.name ? user.name[0].toUpperCase() : 'A'}
           </div>
           <div className="flex flex-col text-left">
-                <span className="text-xs font-bold text-slate-800 uppercase leading-none">
-                {user?.role || 'ADMIN'}
-                </span>
-                <span className="text-[10px] text-slate-400 leading-tight mt-0.5">
-                Admin
-                </span>
-            </div>
+            <span className="text-xs font-bold text-white uppercase leading-none">
+              {user?.role || 'ADMIN'}
+            </span>
+            <span className="text-[10px] text-emerald-100 leading-tight mt-0.5">
+              Admin
+            </span>
+          </div>
         </div>
-        
 
         <button
-          onClick={logout}
+          type="button"
+          onClick={handleLogout}
           aria-label="Logout"
           className="rounded-lg p-2 transition hover:bg-white/15"
         >

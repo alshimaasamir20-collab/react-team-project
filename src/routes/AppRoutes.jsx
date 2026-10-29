@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import App from "../App";
+import Login from "../pages/Login";
 
 import Dashboard from "../pages/Dashboard";
 import Users from "../pages/Users";
@@ -12,6 +13,8 @@ import Settings from "../pages/Settings";
 function AppRoutes() {
   return (
     <Routes>
+        <Route path="login" element={<Login />} />
+        
       <Route path="/" element={<App />}>
         <Route index element={<Dashboard />} />
         <Route path="users" element={<Users />} />
