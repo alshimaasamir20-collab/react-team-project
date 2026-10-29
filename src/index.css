@@ -1,1 +1,16 @@
 @import "tailwindcss";
+:root {
+  color-scheme: light;
+  --page-bg: #f8fafc;
+  --page-text: #111827;
+  --card-bg: #ffffff;
+  --card-border: #e5e7eb;
+}
+
+html.dark {
+  color-scheme: dark;
+  --page-bg: #030712;
+  --page-text: #f9fafb;
+  --card-bg: #111827;
+  --card-border: #374151;
+}
