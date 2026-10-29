@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import { Outlet } from "react-router-dom";
@@ -12,7 +12,7 @@ function App() {
   }, [darkMode]);
 
   return (
-    <div className="min-h-screen bg-[var(--page-bg)] text-[var(--page-text)] transition-colors duration-300">
+    <div className="min-h-screen bg-[var(--page-bg)] text-[var(--page-text)] transition-colors">
       <Navbar
         darkMode={darkMode}
         setDarkMode={setDarkMode}

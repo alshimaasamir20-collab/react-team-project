@@ -39,14 +39,14 @@
         }
     };
     const logout = () => {
+        setUser(null);
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        setUser(null);
     };
 
     return (
         <AuthContext.Provider value={{ user, login, logout, loading }}>
-        { children}
+        {!loading && children}
         </AuthContext.Provider>
     );
     };

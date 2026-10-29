@@ -1,42 +1,30 @@
-    import React, { useState } from 'react'; // حرف i صغير
-    import { useNavigate } from 'react-router-dom';
+    import React, { useState } from 'react';
     import { useAuth } from '../context/AuthContext';
     import { Mail, Lock, ShoppingBag, Check } from 'lucide-react';
 
     export default function Login() {
     const { login } = useAuth();
-    const navigate = useNavigate();
     const [email, setEmail] = useState('admin@koda.com');
     const [password, setPassword] = useState('123456');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         setError('');
         setLoading(true);
 
-        try {
-        const res = await login(email, password);
-        
-        // إذا نجح تسجيل الدخول، انقل المستخدم فوراً إلى الداشبورد
-        if (res?.success || res === undefined) {
-            navigate('/');
-        } else {
-            setError(res?.message || 'Invalid email or password');
+        const res = login(email, password);
+        if (!res.success) {
+        setError(res.message);
         }
-        } catch (err) {
-        setError(err?.message || 'Login failed, please check your credentials');
-        } finally {
         setLoading(false);
-        }
     };
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-[#E9F5EF] via-[#f4faf6] to-[#fffdf7] flex items-center justify-center p-4">
         <div className="w-full max-w-4xl bg-[#fffdf7] rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row border border-white/60">
             
-            {/* Left Side */}
             <div className="md:w-1/2 bg-gradient-to-b from-[#123C35] to-[#187a63] p-8 md:p-12 text-white flex flex-col justify-between">
             <div>
                 <div className="flex items-center gap-2 mb-10">
@@ -70,8 +58,8 @@
             </div>
             </div>
 
-            {/* Right Side */}
             <div className="md:w-1/2 p-8 md:p-12 flex flex-col justify-center bg-white">
+            
             <div className="text-center mb-6">
                 <div className="inline-flex items-center gap-2 mb-3">
                 <div className="w-10 h-10 rounded-xl bg-[#123C35] flex items-center justify-center text-white font-black text-xl shadow-md shadow-sky-500/20">
@@ -132,7 +120,7 @@
                 <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2.5 bg-[#123C35] hover:bg-[#0f2f2a] text-white font-medium rounded-lg text-sm shadow-md shadow-green-500/20 transition duration-150 disabled:opacity-50 cursor-pointer"
+                className="w-full py-2.5 bg-[#123C35] hover:bg-[#0f2f2a] text-white font-medium rounded-lg text-sm shadow-md shadow-green-500/20 transition duration-150 disabled:opacity-50"
                 >
                 {loading ? 'Signing in...' : 'Sign In'}
                 </button>
