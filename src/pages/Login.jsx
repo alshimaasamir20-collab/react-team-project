@@ -1,24 +1,33 @@
     import React, { useState } from 'react';
+    import { useNavigate } from 'react-router-dom';
     import { useAuth } from '../context/AuthContext';
     import { Mail, Lock, ShoppingBag, Check } from 'lucide-react';
 
     export default function Login() {
     const { login } = useAuth();
+    const navigate = useNavigate();
     const [email, setEmail] = useState('admin@koda.com');
     const [password, setPassword] = useState('123456');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
         setLoading(true);
 
-        const res = login(email, password);
-        if (!res.success) {
-        setError(res.message);
+        try {
+        const res = await login(email, password);
+        if (res?.success || res === undefined) {
+            navigate('/');
+        } else {
+            setError(res?.message || 'Invalid credentials');
         }
+        } catch (err) {
+        setError('Login failed. Please check your credentials.');
+        } finally {
         setLoading(false);
+        }
     };
 
     return (
@@ -59,10 +68,9 @@
             </div>
 
             <div className="md:w-1/2 p-8 md:p-12 flex flex-col justify-center bg-white">
-            
             <div className="text-center mb-6">
                 <div className="inline-flex items-center gap-2 mb-3">
-                <div className="w-10 h-10 rounded-xl bg-[#123C35] flex items-center justify-center text-white font-black text-xl shadow-md shadow-sky-500/20">
+                <div className="w-10 h-10 rounded-xl bg-[#123C35] flex items-center justify-center text-white font-black text-xl">
                     K
                 </div>
                 <div className="text-left leading-none">
@@ -95,7 +103,7 @@
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="admin@koda.com"
-                    className="w-full pl-10 pr-4 py-2.5 bg-[#e9f5ef]/60 focus:bg-white text-[#123C35] placeholder-slate-400 border border-transparent focus:border-sky-500 rounded-lg text-xs outline-none transition"
+                    className="w-full pl-10 pr-4 py-2.5 bg-[#e9f5ef]/60 focus:bg-white text-[#123C35] placeholder-slate-400 border border-transparent focus:border-[#123C35] rounded-lg text-xs outline-none transition"
                     />
                 </div>
                 </div>
@@ -112,7 +120,7 @@
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full pl-10 pr-4 py-2.5 bg-[#e9f5ef]/60 focus:bg-white text-[#123C35] placeholder-slate-400 border border-transparent focus:border-sky-500 rounded-lg text-xs outline-none transition"
+                    className="w-full pl-10 pr-4 py-2.5 bg-[#e9f5ef]/60 focus:bg-white text-[#123C35] placeholder-slate-400 border border-transparent focus:border-[#123C35] rounded-lg text-xs outline-none transition"
                     />
                 </div>
                 </div>
@@ -120,7 +128,7 @@
                 <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2.5 bg-[#123C35] hover:bg-[#0f2f2a] text-white font-medium rounded-lg text-sm shadow-md shadow-green-500/20 transition duration-150 disabled:opacity-50"
+                className="w-full py-2.5 bg-[#123C35] hover:bg-[#0f2f2a] text-white font-medium rounded-lg text-sm shadow-md transition duration-150 disabled:opacity-50 cursor-pointer"
                 >
                 {loading ? 'Signing in...' : 'Sign In'}
                 </button>
@@ -134,7 +142,7 @@
 
                 <button
                 type="button"
-                className="w-full py-2 px-4 border border-slate-200 rounded-lg flex items-center justify-center gap-2 hover:bg-slate-50 transition text-xs font-medium text-slate-700"
+                className="w-full py-2 px-4 border border-slate-200 rounded-lg flex items-center justify-center gap-2 hover:bg-slate-50 transition text-xs font-medium text-slate-700 cursor-pointer"
                 >
                 <svg className="w-4 h-4" viewBox="0 0 24 24">
                     <path

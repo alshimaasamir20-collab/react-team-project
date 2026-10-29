@@ -8,36 +8,53 @@
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        try {
         const savedUser = localStorage.getItem('user');
         const token = localStorage.getItem('token');
 
-        if (savedUser && token) {
-        setUser(JSON.parse(savedUser));
+        if (savedUser && token && savedUser !== 'undefined') {
+            setUser(JSON.parse(savedUser));
         }
+        } catch (err) {
+        console.error('Failed to parse user from localStorage', err);
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
+        } finally {
         setLoading(false);
+        }
     }, []);
 
     const login = async (email, password) => {
         try {
+        // إرسال email و password فقط لمنع خطأ Validation Error
         const response = await api.post('/auth/login', {
             email,
             password,
         });
 
-        const { token, user: userData } = response.data;
+        const token = response.data.token || response.data.accessToken;
+        const userData = response.data.user || response.data;
 
-        localStorage.setItem('token', token);
-        localStorage.setItem('user', JSON.stringify(userData));
+        if (token) {
+            localStorage.setItem('token', token);
+        }
 
-        setUser(userData);
+        if (userData) {
+            localStorage.setItem('user', JSON.stringify(userData));
+            setUser(userData);
+        }
 
         return { success: true };
         } catch (error) {
+        // استخراج نص رسالة الخطأ سواء كانت في errors أو message
         const message =
-            error.response?.data?.message || 'Invalid email or password. Please try again.';
+            error.response?.data?.errors?.[0] ||
+            error.response?.data?.message ||
+            'Invalid email or password. Please try again.';
         return { success: false, message };
         }
     };
+
     const logout = () => {
         setUser(null);
         localStorage.removeItem('token');

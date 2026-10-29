@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://e-commerce-api-3wara.vercel.app/'; 
+const BASE_URL = 'https://e-commerce-api-3wara.vercel.app'; 
 
 const api = axios.create({
   baseURL: BASE_URL,
@@ -25,7 +25,7 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    console.error("API Error:", error.response?.data || error.message);
+    console.error("API Error:", error.response?.status, error.response?.data);
     return Promise.reject(error);
   },
 );
