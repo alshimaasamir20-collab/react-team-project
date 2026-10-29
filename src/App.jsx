@@ -22,35 +22,25 @@
 import React from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Login from './pages/Login';
-import Sidebar from './components/Sidebar';
-import Navbar from './components/Navbar';
 
 function DashboardLayout() {
   const { logout, user } = useAuth();
 
   return (
-    <div className="flex bg-slate-50 min-h-screen text-slate-900">
-      <Sidebar />
-      <div className="flex-1 flex flex-col min-w-0">
-        <Navbar />
-        <main className="p-6">
-          <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
-            <div>
-              <h1 className="text-xl font-bold text-slate-800">
-                مرحباً بك، {user?.name || 'Admin'} 👋
-              </h1>
-              <p className="text-sm text-slate-500 mt-1">
-                تم تسجيل الدخول بنجاح إلى لوحة التحكم.
-              </p>
-            </div>
-            <button
-              onClick={logout}
-              className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition"
-            >
-              تسجيل خروج
-            </button>
-          </div>
-        </main>
+    <div className="min-h-screen bg-[#FFFDF7] flex flex-col items-center justify-center p-6 text-slate-800">
+      <div className="bg-white p-8 rounded-2xl border border-[#E9F5EF] shadow-lg text-center max-w-md w-full">
+        <h1 className="text-2xl font-bold text-[#123C35] mb-2">
+          مرحباً بك، {user?.name || 'Admin'} 
+        </h1>
+        <p className="text-sm text-slate-500 mb-6">
+          أنت مسجل الدخول الآن بنجاح (في انتظار دمج السايد بار والناف بار مع التيم).
+        </p>
+        <button
+          onClick={logout}
+          className="w-full py-2.5 px-4 bg-[#187A63] hover:bg-[#123C35] text-white font-medium rounded-lg text-sm transition duration-150"
+        >
+          تسجيل الخروج (Logout)
+        </button>
       </div>
     </div>
   );
