@@ -7,7 +7,7 @@
     const { login } = useAuth();
     const navigate = useNavigate();
     const [email, setEmail] = useState('admin@koda.com');
-    const [password, setPassword] = useState('123456');
+    const [password, setPassword] = useState('admin1212');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
