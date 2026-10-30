@@ -1,21 +1,37 @@
+import { useState, useEffect } from 'react';
+import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
+import { Outlet } from "react-router-dom";
+
 function App() {
+  const [darkMode, setDarkMode] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", darkMode);
+  }, [darkMode]);
+
   return (
-    <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-      <div className="rounded-2xl bg-white p-10 text-center shadow-xl">
-        <h1 className="text-3xl font-bold text-blue-600">
-          React + Tailwind CSS
-        </h1>
+    <div className="min-h-screen bg-[var(--page-bg)] text-[var(--page-text)] transition-colors">
+      <Navbar
+        darkMode={darkMode}
+        setDarkMode={setDarkMode}
+        onMenuClick={() => setSidebarOpen((prev) => !prev)}
+      />
 
-        <p className="mt-4 text-gray-600">
-          Our team project is ready!
-        </p>
+      <div className="flex items-start">
+        <Sidebar
+          darkMode={darkMode}
+          sidebarOpen={sidebarOpen}
+          setSidebarOpen={setSidebarOpen}
+        />
 
-        <button className="mt-6 rounded-lg bg-blue-600 px-6 py-3 text-white hover:bg-blue-700">
-          Let's Start
-        </button>
+        <main className="min-w-0 flex-1 p-4 sm:p-6">
+          <Outlet />
+        </main>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
