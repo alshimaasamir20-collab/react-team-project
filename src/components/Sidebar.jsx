@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 
 import { NavLink } from "react-router-dom";
+import { useTheme } from "../context/ThemeContext";
 
 const links = [
   { name: "Dashboard", path: "/", icon: LayoutDashboard },
@@ -22,7 +23,8 @@ const links = [
   { name: "Settings", path: "/settings", icon: Settings },
 ];
 
-function Sidebar({ darkMode, sidebarOpen, setSidebarOpen }) {
+function Sidebar({ sidebarOpen, setSidebarOpen }) {
+  const { darkMode } = useTheme();
   return (
     <>
       {sidebarOpen && (
@@ -34,7 +36,8 @@ function Sidebar({ darkMode, sidebarOpen, setSidebarOpen }) {
       )}
 
       <aside
-        className={`fixed bottom-0 left-0 top-16 z-40 flex w-64 flex-col border-r p-4 transition-transform duration-300 lg:sticky lg:top-16 lg:h-[calc(100vh-4rem)] lg:translate-x-0 ${
+        className={`fixed bottom-0 left-0 top-16 z-40 flex w-64 flex-col border-r p-4 transition-transform duration-300 lg:sticky lg:top-16 lg:h-[calc(100vh-4rem)] lg:translate-x-0
+           ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         } ${
           darkMode

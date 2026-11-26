@@ -2,10 +2,12 @@ import React from "react";
 import { Menu, Bell, Sun, Moon, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useTheme } from "../context/ThemeContext";
 
-function Navbar({ darkMode, setDarkMode, onMenuClick }) {
+function Navbar({ onMenuClick }) {
   const { logout, user } = useAuth() || {};
   const navigate = useNavigate();
+  const { darkMode, setDarkMode } = useTheme();
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -14,7 +16,8 @@ function Navbar({ darkMode, setDarkMode, onMenuClick }) {
       logout();
     }
     localStorage.clear();
-    window.location.replace("/login");
+    // window.location.replace("/login");
+    navigate("/login");
   };
 
   return (
@@ -33,9 +36,7 @@ function Navbar({ darkMode, setDarkMode, onMenuClick }) {
         </div>
 
         <div className="min-w-0">
-          <h1 className="truncate text-lg font-bold sm:text-xl">
-            Nexora
-          </h1>
+          <h1 className="truncate text-lg font-bold sm:text-xl">Nexora</h1>
           <p className="hidden text-xs text-emerald-50 sm:block">
             Admin Dashboard
           </p>
@@ -60,14 +61,14 @@ function Navbar({ darkMode, setDarkMode, onMenuClick }) {
 
         <div className="hidden items-center gap-2 sm:flex">
           <div className="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-100 font-semibold text-emerald-800">
-            {user?.name ? user.name[0].toUpperCase() : 'A'}
+            {user?.username ? user.username[0].toUpperCase() : "A"}
           </div>
           <div className="flex flex-col text-left">
             <span className="text-xs font-bold text-white uppercase leading-none">
-              {user?.role || 'ADMIN'}
+              {user?.role || "ADMIN"}
             </span>
             <span className="text-[10px] text-emerald-100 leading-tight mt-0.5">
-              Admin
+             {user?.username ? user.username: ""}
             </span>
           </div>
         </div>
