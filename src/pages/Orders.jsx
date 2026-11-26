@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Search } from "lucide-react";
-import api from "../services/api";
+import api from "../api/axios";
 
 const statusStyles = {
   delivered: "bg-[#187A63]/15 text-[#187A63] dark:text-emerald-300",
